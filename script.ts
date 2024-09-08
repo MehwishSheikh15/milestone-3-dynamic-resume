@@ -3,7 +3,7 @@ document.getElementById('resumeForm')?.addEventListener('submit', function(event
     event.preventDefault();
 
 // type assertion    
-
+const profilePictureInput = document.getElementById('profilePicture') as HTMLInputElement;
     const nameElement = document.getElementById('name') as HTMLInputElement;
     const emailElement = document.getElementById('email') as HTMLInputElement;
     const phoneElement = document.getElementById('phone') as HTMLInputElement;
@@ -11,7 +11,9 @@ document.getElementById('resumeForm')?.addEventListener('submit', function(event
     const experienceElement = document.getElementById('experience') as HTMLInputElement;
     const skillsElement = document.getElementById('skills') as HTMLInputElement;
 
-if(nameElement && emailElement && phoneElement && educationElement && experienceElement && skillsElement){
+if(profilePictureInput && nameElement && emailElement && phoneElement && educationElement && experienceElement && skillsElement){
+    const profilePictureFile = profilePictureInput.files?.[0]
+    const profilePictureUrl = profilePictureFile ? URL.createObjectURL(profilePictureFile) : '';
     const name = nameElement.value;
     const email = emailElement.value;
     const phone = phoneElement.value;
@@ -23,6 +25,7 @@ if(nameElement && emailElement && phoneElement && educationElement && experience
 
     const resumeOutput = `
      <h2>Resume</h2>
+     ${profilePictureUrl ? `<img src=${profilePictureUrl} alt="Profile Picture" class="profilePicture">` : "" }
      <p><strong>Name:</strong> ${name} </p>  
      <p><strong>Email:</strong> ${email} </p>
      <p><strong>Phone Number:</strong> ${phone} </p>
